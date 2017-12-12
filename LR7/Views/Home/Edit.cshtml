@@ -1,0 +1,37 @@
+﻿@model LR7.country
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Edit";
+}
+<html>
+<head>
+    <h2>Edit</h2>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
+        {
+            // <input type="hidden" value="@ViewBag.id_a" name="idgr" />
+            @Html.Hidden("id_country", @ViewBag.id_country as string);
+            <br />
+            @Html.LabelFor(m => m.name, "Назва");
+            <br />
+            <input type="text" value="@ViewBag.name" name="name">
+            <br />
+            @Html.LabelFor(m => m.capital, "Столиця");
+            <br />
+            <input type="text" value="@ViewBag.capital" name="capital">
+            <br />
+            @Html.LabelFor(m => m.region, "Регіон");
+            <br />
+            <input type="text" value="@ViewBag.region" name="region">
+            <br />
+            <br />
+            <p><input type="submit" value="Зберегти" /></p>
+            @Html.ActionLink("Back", "Index")
+        }
+    </div>
+</body>
+</html>

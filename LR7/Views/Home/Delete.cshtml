@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<div>
+    @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+    {
+        var a = ViewBag.country;
+        @Html.Raw("Ви бажаєте знищити запис" + @a.id_country + " " + @a.name + " " + a.capital + " " + a.region);
+        <input type="hidden" value="@a.id_country" name="id_country" />
+        <input type="submit" value="Так" />
+        <input type="button" onclick="history.back(); " value="Назад" />
+    }
+</div>

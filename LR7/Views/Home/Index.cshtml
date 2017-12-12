@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <p />
+    <table>
+        <tr>
+            <td>Код країни</td>
+            <td>Назва</td>
+            <td>Столиця</td>
+            <td>Регіон</td>
+        </tr>
+        @foreach (var r in ViewBag.country)
+        {
+            <tr>
+                <td>@r.id_country</td>
+                <td>@r.name</td>
+                <td>@r.capital</td>
+                <td>@r.region</td>
+                <td><a href="/Home/Edit/@r.id_country">Edit</a></td>
+                <td><a href="/Home/Delete/@r.id_country">Delete</a></td>
+            </tr>
+        }
+    </table>
+    <br />
+    <a href="/Home/Insert">Добавить</a>
+</div>

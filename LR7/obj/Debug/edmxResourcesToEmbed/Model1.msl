@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище CountryModelContainer" CdmEntityContainer="CountryEntities">
+    <EntitySetMapping Name="C_population">
+      <EntityTypeMapping TypeName="CountryModel.C_population">
+        <MappingFragment StoreEntitySet="_population">
+          <ScalarProperty Name="id_population" ColumnName="id_population" />
+          <ScalarProperty Name="strength" ColumnName="strength" />
+          <ScalarProperty Name="countryID" ColumnName="countryID" />
+          <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="country">
+      <EntityTypeMapping TypeName="CountryModel.country">
+        <MappingFragment StoreEntitySet="country">
+          <ScalarProperty Name="id_country" ColumnName="id_country" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="capital" ColumnName="capital" />
+          <ScalarProperty Name="region" ColumnName="region" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="nationality">
+      <EntityTypeMapping TypeName="CountryModel.nationality">
+        <MappingFragment StoreEntitySet="nationality">
+          <ScalarProperty Name="id_nationality" ColumnName="id_nationality" />
+          <ScalarProperty Name="language_of_nationality" ColumnName="language_of_nationality" />
+          <ScalarProperty Name="name_of_nationality" ColumnName="name_of_nationality" />
+          <ScalarProperty Name="total_strength" ColumnName="total_strength" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

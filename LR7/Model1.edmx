@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CountryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="_population">
+          <Key>
+            <PropertyRef Name="id_population" />
+          </Key>
+          <Property Name="id_population" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strength" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="countryID" Type="int" />
+          <Property Name="nationalityID" Type="int" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="id_country" />
+          </Key>
+          <Property Name="id_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+          <Property Name="capital" Type="varchar(max)" />
+          <Property Name="region" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="nationality">
+          <Key>
+            <PropertyRef Name="id_nationality" />
+          </Key>
+          <Property Name="id_nationality" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="language_of_nationality" Type="varchar(max)" />
+          <Property Name="name_of_nationality" Type="varchar(max)" />
+          <Property Name="total_strength" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK___populati__count__276EDEB3">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="_population" Type="Self._population" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="id_country" />
+            </Principal>
+            <Dependent Role="_population">
+              <PropertyRef Name="countryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK___populati__natio__286302EC">
+          <End Role="nationality" Type="Self.nationality" Multiplicity="0..1" />
+          <End Role="_population" Type="Self._population" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nationality">
+              <PropertyRef Name="id_nationality" />
+            </Principal>
+            <Dependent Role="_population">
+              <PropertyRef Name="nationalityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CountryModelContainer">
+          <EntitySet Name="_population" EntityType="Self._population" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nationality" EntityType="Self.nationality" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK___populati__count__276EDEB3" Association="Self.FK___populati__count__276EDEB3">
+            <End Role="country" EntitySet="country" />
+            <End Role="_population" EntitySet="_population" />
+          </AssociationSet>
+          <AssociationSet Name="FK___populati__natio__286302EC" Association="Self.FK___populati__natio__286302EC">
+            <End Role="nationality" EntitySet="nationality" />
+            <End Role="_population" EntitySet="_population" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CountryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C_population">
+          <Key>
+            <PropertyRef Name="id_population" />
+          </Key>
+          <Property Name="id_population" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strength" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="countryID" Type="Int32" />
+          <Property Name="nationalityID" Type="Int32" />
+          <NavigationProperty Name="country" Relationship="Self.FK___populati__count__276EDEB3" FromRole="C_population" ToRole="country" />
+          <NavigationProperty Name="nationality" Relationship="Self.FK___populati__natio__286302EC" FromRole="C_population" ToRole="nationality" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="id_country" />
+          </Key>
+          <Property Name="id_country" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="capital" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="region" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="C_population" Relationship="Self.FK___populati__count__276EDEB3" FromRole="country" ToRole="C_population" />
+        </EntityType>
+        <EntityType Name="nationality">
+          <Key>
+            <PropertyRef Name="id_nationality" />
+          </Key>
+          <Property Name="id_nationality" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="language_of_nationality" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="name_of_nationality" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="total_strength" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="C_population" Relationship="Self.FK___populati__natio__286302EC" FromRole="nationality" ToRole="C_population" />
+        </EntityType>
+        <Association Name="FK___populati__count__276EDEB3">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="C_population" Type="Self.C_population" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="id_country" />
+            </Principal>
+            <Dependent Role="C_population">
+              <PropertyRef Name="countryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK___populati__natio__286302EC">
+          <End Role="nationality" Type="Self.nationality" Multiplicity="0..1" />
+          <End Role="C_population" Type="Self.C_population" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nationality">
+              <PropertyRef Name="id_nationality" />
+            </Principal>
+            <Dependent Role="C_population">
+              <PropertyRef Name="nationalityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CountryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C_population" EntityType="Self.C_population" />
+          <EntitySet Name="country" EntityType="Self.country" />
+          <EntitySet Name="nationality" EntityType="Self.nationality" />
+          <AssociationSet Name="FK___populati__count__276EDEB3" Association="Self.FK___populati__count__276EDEB3">
+            <End Role="country" EntitySet="country" />
+            <End Role="C_population" EntitySet="C_population" />
+          </AssociationSet>
+          <AssociationSet Name="FK___populati__natio__286302EC" Association="Self.FK___populati__natio__286302EC">
+            <End Role="nationality" EntitySet="nationality" />
+            <End Role="C_population" EntitySet="C_population" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CountryModelContainer" CdmEntityContainer="CountryEntities">
+          <EntitySetMapping Name="C_population">
+            <EntityTypeMapping TypeName="CountryModel.C_population">
+              <MappingFragment StoreEntitySet="_population">
+                <ScalarProperty Name="id_population" ColumnName="id_population" />
+                <ScalarProperty Name="strength" ColumnName="strength" />
+                <ScalarProperty Name="countryID" ColumnName="countryID" />
+                <ScalarProperty Name="nationalityID" ColumnName="nationalityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="country">
+            <EntityTypeMapping TypeName="CountryModel.country">
+              <MappingFragment StoreEntitySet="country">
+                <ScalarProperty Name="id_country" ColumnName="id_country" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="capital" ColumnName="capital" />
+                <ScalarProperty Name="region" ColumnName="region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nationality">
+            <EntityTypeMapping TypeName="CountryModel.nationality">
+              <MappingFragment StoreEntitySet="nationality">
+                <ScalarProperty Name="id_nationality" ColumnName="id_nationality" />
+                <ScalarProperty Name="language_of_nationality" ColumnName="language_of_nationality" />
+                <ScalarProperty Name="name_of_nationality" ColumnName="name_of_nationality" />
+                <ScalarProperty Name="total_strength" ColumnName="total_strength" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

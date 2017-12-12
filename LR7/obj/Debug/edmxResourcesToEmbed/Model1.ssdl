@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище CountryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="_population">
+    <Key>
+      <PropertyRef Name="id_population" />
+    </Key>
+    <Property Name="id_population" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="strength" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="countryID" Type="int" />
+    <Property Name="nationalityID" Type="int" />
+  </EntityType>
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="id_country" />
+    </Key>
+    <Property Name="id_country" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar(max)" />
+    <Property Name="capital" Type="varchar(max)" />
+    <Property Name="region" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="nationality">
+    <Key>
+      <PropertyRef Name="id_nationality" />
+    </Key>
+    <Property Name="id_nationality" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="language_of_nationality" Type="varchar(max)" />
+    <Property Name="name_of_nationality" Type="varchar(max)" />
+    <Property Name="total_strength" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <Association Name="FK___populati__count__276EDEB3">
+    <End Role="country" Type="Self.country" Multiplicity="0..1" />
+    <End Role="_population" Type="Self._population" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="country">
+        <PropertyRef Name="id_country" />
+      </Principal>
+      <Dependent Role="_population">
+        <PropertyRef Name="countryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK___populati__natio__286302EC">
+    <End Role="nationality" Type="Self.nationality" Multiplicity="0..1" />
+    <End Role="_population" Type="Self._population" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="nationality">
+        <PropertyRef Name="id_nationality" />
+      </Principal>
+      <Dependent Role="_population">
+        <PropertyRef Name="nationalityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище CountryModelContainer">
+    <EntitySet Name="_population" EntityType="Self._population" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="nationality" EntityType="Self.nationality" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK___populati__count__276EDEB3" Association="Self.FK___populati__count__276EDEB3">
+      <End Role="country" EntitySet="country" />
+      <End Role="_population" EntitySet="_population" />
+    </AssociationSet>
+    <AssociationSet Name="FK___populati__natio__286302EC" Association="Self.FK___populati__natio__286302EC">
+      <End Role="nationality" EntitySet="nationality" />
+      <End Role="_population" EntitySet="_population" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
